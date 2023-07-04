@@ -12,10 +12,5 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'users',
   });
 
-  User.associate = (models) => {
-    User.hasOne(models.Account,
-      { foreignKey: 'user_id', as: 'users' });
-  };
-
   return User;
 }

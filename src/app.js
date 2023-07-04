@@ -1,4 +1,5 @@
 const express = require('express');
+const Login = require('./controllers/Login');
 
 const app = express();
 
@@ -8,5 +9,7 @@ app.get('/', (_request, response) => {
 });
 
 app.use(express.json());
+
+app.post('/login', Login.tokenGenerator);
 
 module.exports = app;
