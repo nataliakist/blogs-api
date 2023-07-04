@@ -6,7 +6,7 @@ const getAll = () => User.findAll({ attributes: { exclude: 'password' } });
 
 const getByEmail = (email) => User.findOne({ where: { email } });
 
-const getByUserId = (userId) => User.findByPk(userId);
+const getByUserId = (userId) => User.findByPk(userId, { attributes: { exclude: 'password' } });
 
 const createUser = async ({ displayName, email, password, image }) => {
   const error = schema.validateNewUser({ displayName, email, password, image });
