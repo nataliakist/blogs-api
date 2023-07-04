@@ -3,7 +3,7 @@ const { tokenGenerator } = require('../utils/token');
 
 const isBodyValid = (email, password) => email && password;
 
-const Login = async (req, res) => {
+module.exports = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -17,14 +17,10 @@ const Login = async (req, res) => {
       return res.status(400).json({ message: 'Invalid fields' });
     }
 
-    const token = tokenGenerator({ email });
+    const token = await tokenGenerator({ email });
 
     res.status(200).json({ token });
   } catch (err) {
     return res.status(500).json({ message: 'Erro interno', error: err.message });
   }
-};
-
-module.exports = {
-  Login,
 };
