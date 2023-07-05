@@ -20,7 +20,7 @@ const createUser = async ({ displayName, email, password, image }) => {
 
   const token = await tokenGenerator({ email });
 
-  return token;
+  return { token };
 };
 
 module.exports = {

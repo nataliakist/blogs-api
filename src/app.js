@@ -1,9 +1,6 @@
 const express = require('express');
 const Login = require('./controllers/Login');
-const UserController = require('./controllers/UserController');
-const validateEmail = require('./middlewares/validateEmail');
-const validateUser = require('./middlewares/validateUser');
-const validateToken = require('./middlewares/validateToken');
+const { UserRouter } = require('./routers');
 
 const app = express();
 
@@ -14,12 +11,8 @@ app.get('/', (_request, response) => {
 
 app.use(express.json());
 
-app.get('/user/:id', validateToken, UserController.getById);
-
-app.get('/user', validateToken, UserController.getAll);
+app.use('/user', UserRouter);
 
 app.post('/login', Login);
-
-app.post('/user', validateEmail, validateUser, UserController.createUser);
 
 module.exports = app;
