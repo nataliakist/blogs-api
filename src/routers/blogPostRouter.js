@@ -10,8 +10,10 @@ router.get('/', validateToken, BlogPostController.getAll);
 
 router.get('/:id', validateToken, BlogPostController.getById);
 
+router.post('/', validateToken, validatePostFields, BlogPostController.createPost);
+
 router.put('/:id', validateToken, BlogPostController.updateById);
 
-router.post('/', validateToken, validatePostFields, BlogPostController.createPost);
+router.delete('/:id', validateToken, BlogPostController.deleteById);
 
 module.exports = router;

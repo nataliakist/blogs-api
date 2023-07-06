@@ -56,9 +56,32 @@ const updateById = async (req, res) => {
   return res.status(200).json(updatedPost);
 };
 
+const deleteById = async (req, res) => {
+  const { id } = req.params;
+  const { authorization: token } = req.headers;
+
+  try {
+    const userId = await getUserId(token);
+
+    if (!userId) return res.status(404).json({ message: 'user does not exist' });
+    
+    const post = await BlogPostService.getById(id);
+    const postUserId = post.dataValues.userId;
+
+    if (userId !== postUserId) return res.status(401).json({ message: 'Unauthorized user' });
+
+    await BlogPostService.deleteById(userId, id);
+
+    return res.status(204).json();
+  } catch (err) {
+    return res.status(404).json({ message: 'Post does not exist' });
+  }
+};
+
 module.exports = {
   createPost,
   getAll,
   getById,
   updateById,
+  deleteById,
 };
