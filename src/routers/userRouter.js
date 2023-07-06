@@ -13,4 +13,6 @@ router.get('/', validateToken, UserController.getAll);
 
 router.post('/', validateEmail, validateUser, UserController.createUser);
 
+router.delete('/me', validateToken, UserController.deleteByToken);
+
 module.exports = router;
