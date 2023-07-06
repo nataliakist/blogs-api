@@ -8,6 +8,8 @@ const router = Router();
 
 router.get('/', validateToken, BlogPostController.getAll);
 
+router.get('/:id', validateToken, BlogPostController.getById);
+
 router.post('/', validateToken, validatePostFields, BlogPostController.createPost);
 
 module.exports = router;
