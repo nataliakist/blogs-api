@@ -52,8 +52,6 @@ const deleteByToken = async (req, res) => {
 
   const userId = await getUserId(token);
 
-  console.log(userId);
-
   if (!userId) return res.status(404).json({ message: 'User does not exist' });
 
   await UserService.deleteById(userId);

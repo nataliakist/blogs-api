@@ -4,7 +4,7 @@ const { tokenVerification } = require('../utils/token');
 
 const getUserId = async (token) => {
   const verifiedToken = tokenVerification(token);
-  const userEmail = verifiedToken.data.user.email;
+  const userEmail = verifiedToken.email;
   const user = await UserService.getByEmail(userEmail);
   console.log(user);
   const userId = user.dataValues.id;
