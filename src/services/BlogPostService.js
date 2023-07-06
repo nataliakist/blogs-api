@@ -49,8 +49,27 @@ const getById = async (id) => {
   return post;
 };
 
+const updateById = async (title, content, userId, id) => {
+  const post = await getById(id);
+  const postUserId = post.id;
+
+  if (userId !== postUserId) return { message: 'Unauthorized user' };
+
+  await BlogPost.update(
+    { title, content },
+    { where: { userId, id } },
+  );
+
+  const updatedPost = await getById(id);
+
+  if (!updatedPost) return { message: 'Post does not exist' };
+
+  return updatedPost;
+};
+
 module.exports = {
   createPost,
   getAll,
   getById,
+  updateById,
 };
